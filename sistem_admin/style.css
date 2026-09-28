@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;700&family=Akatab&family=Actor&family=ADLaM+Display&family=Alatsi&display=swap');
+
+:root {
+  --primary-color: #f25019;
+  --primary-hover: #d44315;
+  --bg-color: #ffd0b0;
+  --card-bg: #FEDDC6;
+  --input-bg: #ffffff;
+  --text-main: #333333;
+  --text-muted: #666666;
+  --border-color: #e0e0e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* ✅ CARD DALAM */
+.login-box {
+  background-color: #ffffff5f;
+  padding: 65px 35px 45px 35px;
+  /* Increased top padding to 65px */
+  border-radius: 24px;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.login {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-card {
+  background-color: var(--card-bg);
+  border-radius: 32px;
+  display: flex;
+  width: 80%;
+  max-width: 1100px;
+  min-height: 600px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+/* ✅ PANEL KIRI FIX (CENTER + SPACING FIGMA) */
+.login-form-panel {
+  flex: 1;
+  padding: 0 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+}
+
+/* ✅ PANEL KANAN BIAR GA KOSONG */
+.login-image-panel {
+  flex: 1.3;
+  background-color: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ✅ GAMBAR DIBESARIN & TURUN DIKIT */
+.login-food-image {
+  width: 100%;
+  height: auto;
+  max-width: 620px;
+  /* Increased from 520px */
+  object-fit: contain;
+  transform: translateY(20px);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+.login-logo-wrapper {
+  margin-bottom: 15px;
+  /* Reduced from 30px to move title up */
+}
+
+.login-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+/* ✅ TITLE LEBIH PROPORSIONAL */
+.login-title {
+  font-family: 'Alexandria', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 25px 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-label {
+  font-family: 'Akatab', sans-serif;
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  margin-left: 4px;
+}
+
+.input-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 15px;
+  color: var(--text-main);
+  background-color: var(--input-bg);
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(242, 80, 25, 0.1);
+}
+
+.form-input::placeholder {
+  font-family: 'Actor', sans-serif;
+  color: #bfbfbf;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #bfbfbf;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-masuk {
+  font-family: 'Actor', sans-serif;
+  width: 100%;
+  padding: 14px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-masuk:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-masuk:active {
+  transform: scale(0.98);
+}
+
+.register-prompt {
+  font-family: 'Alatsi', sans-serif;
+  margin-top: 25px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.register-link {
+  font-family: 'ADLaM Display';
+  color: #AE4700;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #8a3800;
+  text-decoration: underline;
+}
+
+/* Alert styles */
+.alert {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.alert.error {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.alert.success {
+  background-color: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+/* RESPONSIVE DESIGN FIX */
+
+/* Tablet & Mobile (Layar di bawah 992px) */
+@media (max-width: 992px) {
+
+  .login {
+    width: 100%;
+    padding: 40px 20px;
+  }
+
+  .login-card {
+    flex-direction: column;
+    width: 100%;
+    max-width: 450px;
+    min-height: auto;
+    margin: 0 auto;
+  }
+
+  .login-image-panel {
+    display: none;
+  }
+
+  .login-form-panel {
+    order: 2;
+    padding: 30px 30px 50px 30px;
+    max-width: 100%;
+    display: block;
+  }
+
+  .login-title {
+    font-size: 32px;
+    text-align: left;
+    margin-bottom: 25px;
+  }
+
+  .login-box {
+    padding: 35px 25px;
+  }
+}
+
+/* Mobile Khusus (Layar sangat kecil) */
+@media (max-width: 480px) {
+  .login-card {
+    width: 95%;
+    border-radius: 20px;
+  }
+
+  .login-food-image {
+    max-width: 260px;
+  }
+
+  .login-form-panel {
+    padding: 25px 20px 40px 20px;
+  }
+}

@@ -1,0 +1,570 @@
+/* ─── RESET & BASE ─── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --orange: #E8470A;
+    --orange-light: #F97316;
+    --orange-pale: #FDBA74;
+    --cream: #FFF8F0;
+    --bone: #FAF5EE;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+    --border: #fde0cc;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to top, #E8470A 0%, #F97316 15%, #FDE8D8 35%, #FFF8F0 60%, #FAF5EE 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+
+/* ─── HERO SLIDER ─── */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    /* Diperpendek sedikit untuk HP */
+    overflow: hidden;
+    background: #E8470A;
+}
+
+.slides {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(.77, 0, .18, 1);
+}
+
+.slide {
+    width: calc(100% / 3);
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.hero-logos {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+
+.hero-logos img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: #fff;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+}
+
+.dot.active {
+    background: #fff;
+    width: 18px;
+    border-radius: 4px;
+}
+
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: #fff;
+    z-index: 10;
+}
+
+/* ─── NAV BACK ─── */
+.nav-back {
+    background: var(--orange);
+    padding: 8px 16px;
+}
+
+.nav-back button {
+    background: #fff;
+    border: none;
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 6px;
+}
+
+/* ─── MAIN CONTAINER ─── */
+.main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 12px 60px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.badge-terlaris {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    border-radius: 50px;
+    padding: 4px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--orange);
+}
+
+.section-sub {
+    font-size: 11px;
+    color: var(--orange-light);
+}
+
+/* ─── SEARCH & TABS ─── */
+.search-wrap {
+    max-width: 400px;
+    margin: 0 auto 15px;
+    position: relative;
+}
+
+.search-wrap input {
+    width: 100%;
+    padding: 10px 16px;
+    border: 2px solid var(--border);
+    border-radius: 50px;
+    font-size: 12px;
+    outline: none;
+}
+
+.category-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 5px 12px;
+    border-radius: 50px;
+    border: 1.5px solid var(--orange);
+    background: transparent;
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.tab-btn.active {
+    background: var(--orange);
+    color: #fff;
+}
+
+/* ─── GRID CARDS (KECIL) ─── */
+.paket-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Tetap 2 kolom untuk HP */
+    gap: 10px;
+    /* Jarak antar kotak diperkecil */
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card.hidden {
+    display: none;
+}
+
+.card-img {
+    width: 100%;
+    height: 95px;
+    /* Ukuran gambar diperkecil */
+    object-fit: cover;
+    background: #eee;
+}
+
+.card-body {
+    padding: 8px;
+}
+
+.card-category-badge {
+    font-size: 7px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--orange-light);
+    border-radius: 4px;
+    padding: 2px 5px;
+    text-transform: uppercase;
+}
+
+.card-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--orange);
+    margin: 3px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-price {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--orange);
+}
+
+.card-price span {
+    font-size: 9px;
+    color: #aaa;
+    font-weight: 400;
+}
+
+.card-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 5px 0;
+    border-radius: 50px;
+    border: 1.5px solid var(--orange);
+    background: transparent;
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+/* ─── OVERLAY DETAIL ─── */
+.card-detail-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(232, 71, 10, 0.96);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 5;
+    text-align: center;
+    color: #fff;
+}
+
+.card.zoomed .card-detail-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.detail-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.detail-text {
+    font-size: 10px;
+    line-height: 1.3;
+    margin-bottom: 8px;
+}
+
+.detail-price {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.close-btn {
+    margin-top: 8px;
+    background: #fff;
+    color: var(--orange);
+    border: none;
+    border-radius: 50px;
+    padding: 3px 12px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+/* ─── NO RESULT ─── */
+.no-result {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px;
+    color: #aaa;
+    font-size: 13px;
+    display: none;
+}
+
+/* ─── RESPONSIVE BREAKPOINTS ─── */
+@media (max-width: 760px) {
+    .hero {
+        height: 160px;
+    }
+
+    .hero-logos {
+        top: 8px;
+        left: 10px;
+    }
+
+    .hero-logos img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .slider-arrow {
+        width: 28px;
+        height: 28px;
+    }
+
+    .main {
+        padding: 16px 12px 48px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .section-sub {
+        font-size: 10px;
+    }
+
+    .search-wrap {
+        max-width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .search-wrap input {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+
+    .category-tabs {
+        gap: 8px;
+    }
+
+    .tab-btn {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+
+    .paket-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .card-img {
+        height: 110px;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .card-category-badge {
+        font-size: 8px;
+        padding: 2px 6px;
+    }
+
+    .card-tag {
+        font-size: 10px;
+    }
+
+    .card-price {
+        font-size: 13px;
+    }
+
+    .card-price span {
+        font-size: 8px;
+    }
+
+    .card-btn {
+        font-size: 10px;
+        padding: 8px 0;
+    }
+
+    .card-detail-overlay {
+        padding: 12px;
+    }
+
+    .detail-title {
+        font-size: 11px;
+    }
+
+    .detail-text {
+        font-size: 9px;
+    }
+
+    .detail-price {
+        font-size: 13px;
+    }
+
+    .close-btn {
+        font-size: 9px;
+        padding: 5px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 140px;
+    }
+
+    .main {
+        padding: 14px 10px 40px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .search-wrap input {
+        font-size: 12px;
+    }
+
+    .category-tabs {
+        justify-content: flex-start;
+    }
+
+    .paket-grid {
+        gap: 10px;
+    }
+
+    .card-img {
+        height: 95px;
+    }
+
+    .card-category-badge {
+        font-size: 7px;
+    }
+
+    .card-tag {
+        font-size: 9px;
+    }
+
+    .close-btn {
+        padding: 4px 10px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero {
+        height: 240px;
+    }
+
+    .main {
+        padding: 28px 20px 72px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .section-sub {
+        font-size: 12px;
+    }
+
+    .search-wrap {
+        max-width: 520px;
+    }
+
+    .category-tabs {
+        gap: 10px;
+    }
+
+    .tab-btn {
+        font-size: 12px;
+        padding: 7px 14px;
+    }
+
+    .paket-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .card-img {
+        height: 130px;
+    }
+
+    .card-body {
+        padding: 12px;
+    }
+
+    .card-category-badge {
+        font-size: 9px;
+    }
+
+    .card-tag {
+        font-size: 12px;
+    }
+
+    .card-price {
+        font-size: 14px;
+    }
+
+    .card-btn {
+        font-size: 11px;
+        padding: 8px 0;
+    }
+
+    .card-detail-overlay {
+        padding: 16px;
+    }
+
+    .detail-title {
+        font-size: 14px;
+    }
+
+    .detail-text {
+        font-size: 11px;
+    }
+
+    .detail-price {
+        font-size: 16px;
+    }
+
+    .close-btn {
+        font-size: 10px;
+        padding: 6px 14px;
+    }
+}

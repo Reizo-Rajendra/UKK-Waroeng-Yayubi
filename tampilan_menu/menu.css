@@ -1,0 +1,381 @@
+/* ==========================================================================
+   1. RESET, VARIABEL, & DASAR (ALL DEVICES)
+   ========================================================================== */
+*, *::before, *::after { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+:root {
+    --orange: #E8470A;
+    --orange-light: #F97316;
+    --orange-pale: #FDBA74;
+    --cream: #FFF8F0;
+    --bone: #FAF5EE;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+    --border: #f0e0d0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to top, #E8470A 0%, #F97316 15%, #FDE8D8 35%, #FFF8F0 60%, #FAF5EE 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ==========================================================================
+   2. HERO & SLIDER BANNER (RESPONSIF - ELEGAN - TIDAK TERLALU BESAR)
+   ========================================================================== */
+.hero {
+    position: relative !important; 
+    width: calc(100% - 24px); 
+    max-width: 1050px;
+    margin: 14px auto 0;
+    height: 150px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #E8470A 0%, #D83A00 100%);
+    box-shadow: 0 6px 20px -4px rgba(232, 71, 10, 0.22), 0 2px 6px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(254, 215, 170, 0.4);
+}
+
+@media (min-width: 768px) { 
+    .hero { 
+        height: 190px;
+        margin: 18px auto 0;
+        border-radius: 20px;
+    } 
+}
+
+@media (min-width: 1200px) { 
+    .hero { 
+        height: 205px;
+    } 
+}
+
+.slides { 
+    display: flex; 
+    width: 300%; 
+    height: 100%; 
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+.slide { 
+    width: calc(100% / 3); 
+    height: 100%; 
+    position: relative; 
+    flex-shrink: 0; 
+}
+
+.slide img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    object-position: center;
+    display: block; 
+}
+
+/* ─── STYLING TOMBOL PANAH NAVIGASI GLASSMORPHISM (LEBIH ELEGAN) ─── */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.88);
+    color: var(--orange);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slider-btn:hover { 
+    background: #ffffff; 
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+.slider-btn:active { transform: translateY(-50%) scale(0.95); }
+
+.prev-btn { left: 12px; }
+.next-btn { right: 12px; }
+
+/* Logo Kecil di Pojok Kiri Atas Banner */
+.hero-logos { 
+    position: absolute; 
+    top: 10px; 
+    left: 12px; 
+    display: flex; 
+    gap: 6px; 
+    z-index: 50; 
+}
+
+.hero-logos img {
+    width: 30px !important; 
+    height: 30px !important; 
+    border-radius: 50%;
+    border: 2px solid white; 
+    background: white;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+
+/* ==========================================================================
+   3. TOMBOL KEMBALI & NAVIGASI ATAS
+   ========================================================================== */
+.nav-back { 
+    background: transparent !important; 
+    padding: 12px 12px 0; 
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.nav-back button {
+    background: #ffffff; 
+    border: 1.5px solid var(--orange-pale); 
+    color: var(--orange);
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px; 
+    font-weight: 700; 
+    padding: 6px 16px; 
+    border-radius: 50px;
+    box-shadow: 0 2px 6px rgba(232, 71, 10, 0.1);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+}
+
+.nav-back button::before {
+    content: '←';
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.nav-back button:hover {
+    background: var(--orange);
+    color: #ffffff;
+    border-color: var(--orange);
+    transform: translateX(-3px);
+    box-shadow: 0 4px 10px rgba(232, 71, 10, 0.22);
+}
+
+/* ==========================================================================
+   4. STRUKTUR LAYOUT UTAMA (RESPONSIF GRID)
+   ========================================================================== */
+.main { 
+    max-width: 1050px; 
+    margin: 0 auto; 
+    padding: 16px 12px 60px; 
+}
+
+.section-header { text-align: center; margin-bottom: 20px; }
+.section-title { font-size: 28px; font-weight: 800; color: var(--orange); margin-top: 5px; }
+.section-sub { font-size: 14px; color: var(--text-mid); margin-top: 5px; }
+
+.content-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 28px; 
+    align-items: start; 
+}
+
+@media (min-width: 900px) { 
+    .content-grid { grid-template-columns: 1fr 420px; } 
+}
+
+.paket-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 12px; 
+    margin-bottom: 30px;
+}
+
+@media (max-width: 500px) { 
+    .paket-grid { grid-template-columns: 1fr; } 
+}
+
+/* ==========================================================================
+   5. KARTU KATALOG MENU (CARDS STYLE)
+   ========================================================================== */
+.card {
+    background: white; 
+    border-radius: 12px; 
+    overflow: hidden;
+    border: 1px solid #fde0cc; 
+    position: relative;
+    box-shadow: 0 4px 10px rgba(232,71,10,0.1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+    transform: scale(1.03);
+    z-index: 2;
+    box-shadow: 0 8px 20px rgba(232,71,10,0.2);
+}
+
+.card-img { 
+    width: 100%; 
+    height: 140px; 
+    object-fit: cover; 
+    display: block;
+}
+
+.card-body { padding: 12px; }
+.card-tag { font-size: 14px; font-weight: 700; color: var(--orange); margin-bottom: 4px; }
+.card-desc { font-size: 11px; color: #666; line-height: 1.4; margin-bottom: 8px; }
+.card-price { font-size: 14px; font-weight: 800; color: var(--orange); }
+
+.card-btn {
+    width: 100%; 
+    padding: 8px 0; 
+    border-radius: 50px;
+    border: 1.5px solid var(--orange); 
+    background: transparent;
+    color: var(--orange); 
+    font-size: 11px; 
+    font-weight: 600; 
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.card-btn:hover { background: var(--orange); color: white; }
+
+.card-detail-overlay {
+    position: absolute; 
+    inset: 0; 
+    background: rgba(232,71,10,0.96);
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    padding: 12px; 
+    opacity: 0; 
+    pointer-events: none;
+    transition: 0.3s; 
+    z-index: 5; 
+    text-align: center;
+}
+.card.zoomed .card-detail-overlay { opacity: 1; pointer-events: auto; }
+.detail-title { color: white; font-size: 14px; font-weight: 800; margin-bottom: 6px; }
+.detail-text { color: white; font-size: 11px; margin-bottom: 12px; line-height: 1.4; }
+.close-btn { background: white; color: var(--orange); border: none; font-size: 11px; padding: 6px 14px; border-radius: 20px; font-weight: 700; cursor: pointer; }
+
+/* ==========================================================================
+   6. FORMULIR PEMESANAN (BOX & INPUTS)
+   ========================================================================== */
+.order-form { 
+    background: white; 
+    border-radius: 16px; 
+    overflow: hidden; 
+    border: 1px solid #fde0cc; 
+    box-shadow: 0 10px 25px rgba(232,71,10,0.1); 
+}
+.form-header { background: var(--orange); color: white; padding: 16px; text-align: center; }
+.form-header h2 { font-size: 18px; font-weight: 800; }
+.form-body { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+
+.field label { font-size: 12px; font-weight: 700; color: #555; display: block; margin-bottom: 6px; }
+.field input, .field select {
+    width: 100%; 
+    padding: 12px; 
+    border: 1.5px solid #f0ddd0; 
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 13px; 
+    background: #fffaf7; 
+    outline: none;
+}
+
+.time-select { 
+    display: flex; 
+    align-items: center; 
+    border: 1.5px solid #f0ddd0; 
+    border-radius: 10px; 
+    background: #fffaf7; 
+    overflow: hidden; 
+}
+.time-select select { border: none; flex: 1; padding: 12px; background: transparent; font-family: inherit; }
+.time-sep { padding: 0 5px; color: #aaa; font-weight: bold; }
+
+/* ==========================================================================
+   7. SELEKSI PILIHAN MENU (CHECKBOX)
+   ========================================================================== */
+.menu-options { 
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border: 1.5px solid #f0ddd0; 
+    border-radius: 10px; 
+    padding: 10px;
+    max-height: 250px; 
+    overflow-y: auto; 
+    background: white;
+}
+
+.menu-option { 
+    display: flex !important; 
+    align-items: center !important; 
+    gap: 12px; 
+    padding: 8px 5px;
+    border-bottom: 1px solid #f5e8de;
+    cursor: pointer;
+}
+.menu-option:last-child { border-bottom: none; }
+
+.menu-option input[type="checkbox"] { 
+    width: 18px !important; 
+    height: 18px !important; 
+    margin: 0 !important; 
+    accent-color: var(--orange); 
+    flex-shrink: 0;
+}
+.menu-option span { font-size: 13px; color: #444; }
+
+.form-note { font-size: 11px; color: var(--orange); text-align: center; font-weight: 600; background: #fff3ec; padding: 10px; border-radius: 10px; border: 1px dashed var(--orange); }
+
+.btn-order {
+    background: var(--orange); 
+    color: white; 
+    border: none; 
+    padding: 15px;
+    border-radius: 12px; 
+    font-weight: 800; 
+    font-size: 15px;
+    box-shadow: 0 4px 12px rgba(232,71,10,0.3);
+    cursor: pointer;
+    width: 100%;
+}
+.btn-order:active { transform: scale(0.98); }
+
+/* ==========================================================================
+   8. NOTIFIKASI VALIDASI & ERROR HANDLING (ASLI MILIK ANDA)
+   ========================================================================= */
+.error input, .error .menu-options { 
+    border-color: #e05 !important; 
+    border-width: 2px !important; 
+    background-color: #fff0f2 !important;
+}
+.hint { 
+    color: #e05; 
+    font-size: 10px; 
+    margin-top: 4px; 
+    display: none; 
+    font-weight: 600; 
+}
+.error .hint { 
+    display: block; 
+}

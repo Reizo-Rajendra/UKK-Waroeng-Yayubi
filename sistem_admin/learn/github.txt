@@ -1,0 +1,17 @@
+github action command
+1. git add . ( select all file project )
+2. git commit -m "pesan yang diinginkan" ( commit project )
+3. git push origin main ( push projek ke branch main/master )
+
+
+4. git checkout namabranch ( buat branch/cabang baru )
+5. git branch namabranch ( ganti/switch ke branch yang ada sesuai nama )
+6. git checkout -b namabranch ( buat branch baru dan langsung pindah ke branchya )
+
+7. git pull ( import projek sesuai branch )
+
+Lainnya
+8 git init (init/ setup awal projek ke github)
+9. git clone linkgithubnya ( clone atau copy repository )
+10. git status ( cek riwayat atau status )
+11. git remote add <repo_name> <remote_url> ( nambahkan remote pada repo nya )

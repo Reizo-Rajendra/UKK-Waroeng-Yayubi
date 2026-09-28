@@ -1,0 +1,12 @@
+# File konfigurasi lokal dengan API key asli
+midtrans_config.local.php
+.env
+.env.local
+
+# XAMPP / PHP
+*.log
+/vendor/
+
+# OS files
+.DS_Store
+Thumbs.db

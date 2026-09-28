@@ -1,0 +1,393 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-body: #c9651a;
+  --bg-center: #fdf0dc;
+  --bg-pill: #e0a060;
+  --accent: #8b3a0f;
+  --text-dark: #3d1500;
+  --text-mid: #6b2a00;
+  --desc-bg: rgba(120, 55, 5, 0.10);
+  --desc-bdr: rgba(100, 50, 0, 0.18);
+}
+
+body {
+  background: var(--bg-body);
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.topbar {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 10px;
+}
+
+.topbar-label {
+  color: #f5d8b0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.card {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 18px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 210px 1fr 210px;
+  min-height: 460px;
+  box-shadow: 0 8px 32px rgba(50, 15, 0, 0.30);
+}
+
+.left-panel {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 20px;
+  gap: 18px;
+  background: linear-gradient(to right, #f0a878 0%, #f7c09a 55%, #fad4b8 100%);
+}
+
+.right-panel {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 20px;
+  gap: 18px;
+  background: linear-gradient(to left, #f0a878 0%, #f7c09a 55%, #fad4b8 100%);
+}
+
+.center-panel {
+  background: var(--bg-center);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 26px 22px 22px;
+  gap: 11px;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: relative;
+  z-index: 2;
+}
+
+.ct {
+  font-family: 'Fredoka One', cursive;
+  color: #6b2000;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+.ci {
+  font-size: 10px;
+  color: #3d1500;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.55;
+  letter-spacing: 0.3px;
+}
+
+.pill {
+  background: var(--bg-pill);
+  border-radius: 20px;
+  padding: 4px 22px;
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-ring {
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(80, 30, 0, 0.18);
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.brand {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.brand span {
+  display: block;
+  font-family: 'Fredoka One', cursive;
+  color: var(--accent);
+  font-size: 21px;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+.tagline {
+  font-size: 10px;
+  color: var(--text-mid);
+  font-style: italic;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.7;
+  position: relative;
+  z-index: 2;
+  padding: 0 6px;
+}
+
+.chef-row {
+  font-size: 22px;
+  position: relative;
+  z-index: 2;
+}
+
+.desc-box {
+  background: var(--desc-bg);
+  border-radius: 12px;
+  padding: 13px 14px;
+  position: relative;
+  z-index: 2;
+  border: 1.5px solid var(--desc-bdr);
+}
+
+.desc-box p {
+  font-size: 10.5px;
+  color: var(--text-dark);
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.food-art {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 2;
+}
+
+.doodle-bg,
+.center-doodle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.doodle-bg {
+  opacity: 0.28;
+}
+
+.center-doodle {
+  opacity: 0.07;
+}
+
+.logo-ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 860px) {
+  .card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .topbar {
+    text-align: center;
+  }
+
+  .left-panel,
+  .right-panel,
+  .center-panel {
+    padding: 22px 18px;
+  }
+
+  .left-panel,
+  .right-panel,
+  .center-panel,
+  .contact-item,
+  .desc-box {
+    width: 100%;
+  }
+
+  .left-panel,
+  .right-panel {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 12px;
+  }
+
+  .card {
+    border-radius: 16px;
+  }
+
+  .left-panel,
+  .right-panel {
+    padding: 18px 14px;
+    gap: 14px;
+  }
+
+  .center-panel {
+    padding: 18px 14px 16px;
+    gap: 10px;
+  }
+
+  .contact-item {
+    gap: 2px;
+  }
+
+  .ct {
+    font-size: 15px;
+  }
+
+  .ci {
+    font-size: 9px;
+  }
+
+  .pill {
+    padding: 4px 18px;
+    font-size: 10px;
+  }
+
+  .logo-ring {
+    width: 128px;
+    height: 128px;
+  }
+
+  .brand span {
+    font-size: 19px;
+  }
+
+  .tagline {
+    font-size: 9px;
+    padding: 0 4px;
+  }
+
+  .chef-row {
+    font-size: 20px;
+  }
+
+  .desc-box {
+    padding: 12px 12px;
+  }
+
+  .desc-box p {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .card {
+    box-shadow: 0 6px 18px rgba(50, 15, 0, 0.22);
+  }
+
+  .left-panel,
+  .right-panel,
+  .center-panel {
+    padding: 16px 12px;
+  }
+
+  .logo-ring {
+    width: 110px;
+    height: 110px;
+  }
+
+  .brand span {
+    font-size: 17px;
+  }
+
+  .chef-row {
+    font-size: 18px;
+  }
+
+  .desc-box p {
+    font-size: 9.5px;
+  }
+}
+/* Pastikan container utama kartu memiliki posisi relative */
+.card-container {
+    position: relative; /* Ini wajib agar posisi tombol mengacu pada kartu, bukan layar browser */
+}
+
+/* Style untuk tombol kembali */
+.btn-kembali {
+    position: absolute;
+    top: 20px;          /* Jarak dari atas kartu */
+    left: 20px;         /* Jarak dari kiri kartu */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;           /* Jarak antara ikon panah dan teks */
+    padding: 8px 16px;
+    background-color: #d36327; /* Warna orange yang senada dengan tema website */
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 20px; /* Membuat sudut tombol melengkung (rounded) */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 10;        /* Memastikan tombol berada di lapisan paling atas */
+}
+
+/* Efek saat tombol diarahkan oleh mouse (hover) */
+.btn-kembali:hover {
+    background-color: #b54f1d; /* Warna orange sedikit lebih gelap */
+    transform: translateY(-2px); /* Efek sedikit terangkat */
+}
+/* Style untuk tombol kembali (Rekomendasi ditaruh di dalam/sejajar .topbar) */
+.btn-kembali {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;           /* Jarak antara ikon dan teks */
+    padding: 8px 18px;
+    background-color: var(--accent); /* Menggunakan variabel warna cokelat tua biar match */
+    color: #fdf0dc;     /* Menggunakan warna krem lembut dari variabel --bg-center */
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 20px; 
+    box-shadow: 0 4px 12px rgba(50, 15, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-bottom: 12px; /* Memberi jarak ke kartu di bawahnya */
+}
+
+/* Efek saat tombol di-hover */
+.btn-kembali:hover {
+    background-color: var(--text-dark); /* Berubah ke cokelat yang lebih gelap */
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(50, 15, 0, 0.3);
+}

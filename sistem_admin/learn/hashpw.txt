@@ -1,0 +1,4 @@
+if (isset($_GET['generate'])) {
+    echo password_hash("dap0eryayubi_Enak", PASSWORD_DEFAULT);
+    exit;
+}

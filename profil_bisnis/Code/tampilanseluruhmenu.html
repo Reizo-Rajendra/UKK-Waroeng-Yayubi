@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Catering - Sajian Penuh Martabat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --orange: #E8470A;
+      --orange-light: #F97316;
+      --orange-pale: #FDBA74;
+      --cream: #FFF8F0;
+      --bone: #FAF5EE;
+      --text-dark: #1a1a1a;
+      --text-mid: #444;
+      --border: #f0e0d0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to top, #E8470A 0%, #F97316 15%, #FDE8D8 35%, #FFF8F0 60%, #FAF5EE 100%);
+      min-height: 100vh;
+      color: var(--text-dark);
+    }
+
+    /* ─── HERO SLIDER ─── */
+    .hero {
+      position: relative;
+      width: calc(100% - 24px);
+      max-width: 1050px;
+      margin: 14px auto 0;
+      height: 150px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #E8470A 0%, #c73d08 100%);
+      box-shadow: 0 6px 20px -4px rgba(232, 71, 10, 0.22), 0 2px 6px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(254, 215, 170, 0.4);
+    }
+
+    @media(min-width:768px) {
+      .hero {
+        height: 190px;
+        margin: 18px auto 0;
+        border-radius: 20px;
+      }
+    }
+
+    @media(min-width:1200px) {
+      .hero {
+        height: 205px;
+      }
+    }
+
+    .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(.77, 0, .18, 1);
+    }
+
+    .slide {
+      width: calc(100% / 3);
+      height: 100%;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-logos {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .hero-logos img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      object-fit: cover;
+      background: #fff;
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 7px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      border: none;
+      cursor: pointer;
+      transition: all .3s;
+      padding: 0;
+    }
+
+    .dot.active {
+      background: #fff;
+      width: 22px;
+      border-radius: 4px;
+    }
+
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.25);
+      border: none;
+      cursor: pointer;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 16px;
+      z-index: 10;
+      transition: background .2s;
+    }
+
+    .slider-arrow:hover {
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .slider-arrow.prev {
+      left: 12px;
+    }
+
+    .slider-arrow.next {
+      right: 12px;
+    }
+
+    /* ─── NAV BAR ─── */
+    .nav-back {
+      background: transparent !important;
+      padding: 10px 16px 0;
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    .nav-back button {
+      background: #fff;
+      border: 1.5px solid var(--orange-pale);
+      color: var(--orange);
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      transition: all .2s;
+    }
+
+    .nav-back button:hover {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .nav-back button::before {
+      content: '←';
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    /* ─── MAIN ─── */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 16px 60px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .badge-terlaris {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .badge-terlaris::before {
+      content: '📈';
+      font-size: 13px;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      color: var(--orange);
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--orange-light);
+      margin-top: 2px;
+    }
+
+    /* ─── SEARCH BAR ─── */
+    .search-wrap {
+      max-width: 520px;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 12px 44px 12px 18px;
+      border: 2px solid #fde0cc;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      color: var(--text-dark);
+      background: #fff;
+      outline: none;
+      box-shadow: 0 4px 16px rgba(232, 71, 10, 0.10);
+      transition: border .2s, box-shadow .2s;
+    }
+
+    .search-wrap input:focus {
+      border-color: var(--orange-light);
+      box-shadow: 0 4px 20px rgba(232, 71, 10, 0.18);
+    }
+
+    .search-wrap input::placeholder {
+      color: #bbb;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      pointer-events: none;
+    }
+
+    /* ─── CATEGORY TABS ─── */
+    .category-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .tab-btn {
+      padding: 6px 16px;
+      border-radius: 50px;
+      border: 1.5px solid var(--orange);
+      background: transparent;
+      color: var(--orange);
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+
+    .tab-btn.active,
+    .tab-btn:hover {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    /* ─── PAKET CARDS GRID — 4 kolom ─── */
+    .paket-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(232, 71, 10, 0.10);
+      border: 1px solid #fde0cc;
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(232, 71, 10, 0.18);
+    }
+
+    .card.hidden {
+      display: none;
+    }
+
+    /* Lebih kecil di 4 kolom */
+    .card-img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      display: block;
+      background: #f5e8de;
+    }
+
+    .card-body {
+      padding: 9px 10px 11px;
+    }
+
+    .card-category-badge {
+      display: inline-block;
+      font-size: 8px;
+      font-weight: 700;
+      color: #fff;
+      background: var(--orange-light);
+      border-radius: 50px;
+      padding: 2px 7px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .card-desc {
+      font-size: 10px;
+      color: #777;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .card-price-label {
+      font-size: 9px;
+      color: #aaa;
+      margin-bottom: 1px;
+    }
+
+    .card-price {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--orange);
+    }
+
+    .card-price span {
+      font-size: 10px;
+      font-weight: 500;
+      color: #aaa;
+    }
+
+    .card-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      justify-content: center;
+      width: 100%;
+      margin-top: 8px;
+      padding: 6px 0;
+      border-radius: 50px;
+      border: 1.5px solid var(--orange);
+      background: transparent;
+      color: var(--orange);
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+
+    .card-btn:hover {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    /* ─── CARD DETAIL OVERLAY ─── */
+    .card-detail-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(232, 71, 10, 0.92);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+      z-index: 5;
+    }
+
+    .card.zoomed .card-detail-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .card-detail-overlay .detail-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      text-align: center;
+    }
+
+    .card-detail-overlay .detail-text {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.92);
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .card-detail-overlay .detail-price {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+
+    .card-detail-overlay .detail-price-label {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .card-detail-overlay .close-btn {
+      margin-top: 12px;
+      background: rgba(255, 255, 255, 0.25);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      color: #fff;
+      border-radius: 50px;
+      padding: 4px 14px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .card-detail-overlay .close-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* no result */
+    .no-result {
+      text-align: center;
+      padding: 40px 20px;
+      color: #aaa;
+      font-size: 14px;
+      display: none;
+      grid-column: 1 / -1;
+    }
+
+    .no-result span {
+      font-size: 36px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    @media(max-width:900px) {
+      .paket-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:500px) {
+      .paket-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .slide-custom {
+      overflow: hidden;
+    }
+
+    .slide-bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    /* Container utama tombol */
+    .btn-solid {
+      margin: 14px auto 0;
+      max-width: 1050px;
+      padding: 0 16px;
+      display: block;
+      background: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+      transform: none !important;
+    }
+
+    .btn-solid:hover,
+    .btn-solid:active,
+    .btn-solid:focus {
+      background: transparent !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    /* Desain Tombol Kembali */
+    .btn-kembali {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #ffffff;
+      color: #E8470A;
+      border: 1.5px solid #FDBA74;
+      padding: 7px 18px;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(232, 71, 10, 0.12);
+      transition: all 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+
+    .btn-kembali:hover {
+      background-color: #E8470A;
+      color: #ffffff;
+      border-color: #E8470A;
+      transform: translateX(-3px);
+      box-shadow: 0 4px 12px rgba(232, 71, 10, 0.25);
+    }
+
+/* Desain khusus untuk simbol panah di dalam span */
+.btn-kembali span {
+  font-size: 16px;           /* Ukuran panah sedikit lebih besar dari teks */
+  line-height: 1;
+}
+
+/* Desain tombol aksi pemesanan */
+.order-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 15px auto 25px;
+  max-width: 650px;
+}
+.order-bar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #E8470A 0%, #F97316 100%);
+  color: white;
+  padding: 9px 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(232, 71, 10, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.order-bar-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 71, 10, 0.4);
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════ HERO SLIDER ══════════ -->
+  <div class="hero">
+    <div class="hero-logos">
+      <img src="Gambar/logo halal.jpeg" alt="Halal">
+      <img src="Gambar/logo yayubi.jpeg" alt="Yayubi">
+    </div>
+    <div class="slides" id="slides">
+      <div class="slide slide-custom"><img class="slide-bg-img" src="Gambar/Banner nasi tumpeng.png" alt="Nasi Tumpeng">
+      </div>
+      <div class="slide slide-custom"><img class="slide-bg-img" src="Gambar/Banner nasi box.png" alt="Nasi Box"></div>
+      <div class="slide slide-custom"><img class="slide-bg-img" src="Gambar/Banner snack.png" alt="Snack"></div>
+    </div>
+    <button class="slider-arrow prev" onclick="moveSlide(-1)">&#8249;</button>
+    <button class="slider-arrow next" onclick="moveSlide(1)">&#8250;</button>
+    <div class="slider-dots">
+      <button class="dot active" onclick="goSlide(0)"></button>
+      <button class="dot" onclick="goSlide(1)"></button>
+      <button class="dot" onclick="goSlide(2)"></button>
+    </div>
+  </div>
+
+  <!-- ══════════ NAV BACK ══════════ -->
+  <div class="btn-solid">
+    <a href="../../Home page/home.html" class="btn-kembali">
+      <span>←</span> Kembali
+    </a>
+  </div>
+  <!-- ══════════ MAIN ══════════ -->
+  <div class="main">
+
+    <div class="section-header">
+      <div><span class="badge-terlaris">Paket Terlaris</span></div>
+      <div class="section-title">Menu</div>
+      <div class="section-sub">Pilihan terbaik pelanggan kami</div>
+    </div>
+
+    <!-- ── ORDER SHORTCUT BAR ── -->
+    <div class="order-bar">
+      <a href="../../tampilan_menu/nasibox.php" class="order-bar-btn">🍱 Pesan Nasi Box (Midtrans)</a>
+      <a href="../../tampilan_menu/tumpeng.php" class="order-bar-btn">🍚 Pesan Tumpeng</a>
+      <a href="../../tampilan_menu/snack.php" class="order-bar-btn">🍪 Pesan Snack Box</a>
+    </div>
+
+    <!-- ── SEARCH BAR ── -->
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="Cari menu makanan..." oninput="filterMenu()">
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <!-- ── CATEGORY TABS ── -->
+    <div class="category-tabs">
+      <button class="tab-btn active" onclick="filterCategory('semua', this)">Semua</button>
+      <button class="tab-btn" onclick="filterCategory('nasi-tumpeng', this)">Nasi Tumpeng</button>
+      <button class="tab-btn" onclick="filterCategory('nasi-dus', this)">Nasi Dus</button>
+      <button class="tab-btn" onclick="filterCategory('snack', this)">Snack</button>
+    </div>
+
+    <!-- ── PAKET CARDS ── -->
+    <div class="paket-grid" id="paket-grid">
+
+      <!-- ===== NASI TUMPENG ===== -->
+      <div class="card" id="card1" data-category="nasi-tumpeng" data-name="tumpeng besar nasi tumpeng">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Tumpeng Besar — Nasi Tumpeng</div>
+          <div class="detail-text">Nikmati sajian lengkap dalam satu paket praktis dan lezat! Nasi pulen disajikan
+            dengan lauk pilihan seperti ayam goreng berbumbu, telur, sayur segar, dan sambal nikmat 🌶️</div>
+          <div class="detail-price">Rp600.000</div>
+          <div class="detail-price-label">Mulai dari / pax</div>
+          <button class="close-btn" onclick="closeDetail('card1')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/tumpeng besar.jpeg" alt="Tumpeng Besar">
+        <div class="card-body">
+          <span class="card-category-badge">Nasi Tumpeng</span>
+          <div class="card-tag">Tumpeng Besar</div>
+          <div class="card-desc">Nikmati sajian lengkap dalam satu paket praktis dan lezat! Nasi pulen disajikan dengan
+            lauk pilihan seperti...</div>
+          <div class="card-price-label">Mulai dari</div>
+          <div class="card-price">Rp600.000 <span>/pax</span></div>
+          <button class="card-btn" onclick="showDetail('card1')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card2" data-category="nasi-tumpeng" data-name="tumpeng kecil nasi tumpeng">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Tumpeng Kecil — Nasi Tumpeng</div>
+          <div class="detail-text">Sederhana tapi tetap istimewa! Tumpeng kecil dengan nasi pulen, dilengkapi lauk
+            pilihan seperti ayam goreng, telur, sayur segar, dan sambal yang menggugah selera 🌶️</div>
+          <div class="detail-price">Rp350.000</div>
+          <div class="detail-price-label">Mulai dari / pax</div>
+          <button class="close-btn" onclick="closeDetail('card2')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/tumpeng kecil.jpeg" alt="Tumpeng Kecil">
+        <div class="card-body">
+          <span class="card-category-badge">Nasi Tumpeng</span>
+          <div class="card-tag">Tumpeng Kecil</div>
+          <div class="card-desc">Sederhana tapi tetap istimewa! Tumpeng kecil dengan nasi pulen, dilengkapi lauk pilihan
+            seperti...</div>
+          <div class="card-price-label">Mulai dari</div>
+          <div class="card-price">Rp350.000 <span>/pax</span></div>
+          <button class="card-btn" onclick="showDetail('card2')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- ===== NASI DUS ===== -->
+
+      <!-- Card 2 -->
+      <div class="card" id="card2b" data-category="nasi-dus" data-name="nasi dus ayam goreng nasi box">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nasi Dus Ayam Goreng</div>
+          <div class="detail-text">Nasi + Ayam Goreng + Sambal + Lalap 🍗</div>
+          <div class="detail-price">Rp20.000</div>
+          <div class="detail-price-label">/dus</div>
+          <button class="close-btn" onclick="closeDetail('card2b')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/nasiayamgorengsambellalap.jpeg" alt="Nasi Dus Ayam Goreng">
+        <div class="card-body">
+          <span class="card-category-badge">Nasi Box</span>
+          <div class="card-tag">Nasi Dus Ayam Goreng</div>
+          <div class="card-desc">Nasi + Ayam Goreng + Sambal + Lalap</div>
+          <div class="card-price-label">Harga</div>
+          <div class="card-price">Rp20.000 <span>/dus</span></div>
+          <button class="card-btn" onclick="showDetail('card2b')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card" id="card3b" data-category="nasi-dus" data-name="nasi dus capcay lengkap nasi box">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nasi Dus Lengkap</div>
+          <div class="detail-text">Nasi + Ayam Goreng + Cap Cay + Bakmi + Sambal + Telur Bulat 🍜</div>
+          <div class="detail-price">Rp25.000</div>
+          <div class="detail-price-label">/dus</div>
+          <button class="close-btn" onclick="closeDetail('card3b')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/nasi capcay.jpeg" alt="Nasi Dus Lengkap">
+        <div class="card-body">
+          <span class="card-category-badge">Nasi Box</span>
+          <div class="card-tag">Nasi Dus Capcay</div>
+          <div class="card-desc">Nasi + Ayam Goreng + Cap Cay + Bakmi + Sambal + Telur</div>
+          <div class="card-price-label">Harga</div>
+          <div class="card-price">Rp25.000 <span>/dus</span></div>
+          <button class="card-btn" onclick="showDetail('card3b')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card" id="card4b" data-category="nasi-dus" data-name="nasi dus gudangan nasi box">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nasi Dus Gudangan</div>
+          <div class="detail-text">Nasi + Gudangan Sayur + Tahu/Tempe + Telur Bulat 🥗</div>
+          <div class="detail-price">Rp20.000</div>
+          <div class="detail-price-label">/dus</div>
+          <button class="close-btn" onclick="closeDetail('card4b')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/nasi gudangan.jpeg" alt="Nasi Dus Gudangan">
+        <div class="card-body">
+          <span class="card-category-badge">Nasi Box</span>
+          <div class="card-tag">Nasi Dus Gudangan</div>
+          <div class="card-desc">Nasi + Gudangan Sayur + Tahu/Tempe + Telur Bulat</div>
+          <div class="card-price-label">Harga</div>
+          <div class="card-price">Rp20.000 <span>/dus</span></div>
+          <button class="card-btn" onclick="showDetail('card4b')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card" id="card5b" data-category="nasi-dus" data-name="nasi dus kering tempe nasi box">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nasi Dus Kering Tempe</div>
+          <div class="detail-text">Nasi + Kering Tempe + Telur Dadar + Sambal Goreng + Kerupuk 🥚</div>
+          <div class="detail-price">Rp25.000</div>
+          <div class="detail-price-label">/dus</div>
+          <button class="close-btn" onclick="closeDetail('card5b')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/nasi kering tempe.jpeg" alt="Nasi Dus Kering Tempe">
+        <div class="card-body">
+          <span class="card-category-badge">Nasi Box</span>
+          <div class="card-tag">Nasi Dus Kering Tempe</div>
+          <div class="card-desc">Nasi + Kering Tempe + Telur Dadar + Sambal Goreng + Kerupuk</div>
+          <div class="card-price-label">Harga</div>
+          <div class="card-price">Rp25.000 <span>/dus</span></div>
+          <button class="card-btn" onclick="showDetail('card5b')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- ===== SNACK ===== -->
+      <div class="card" id="card8" data-category="snack" data-name="kroket snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Kroket</div>
+          <div class="detail-text">Kroket goreng keemasan dengan isian kentang lembut berbumbu. Luar renyah, dalam gurih
+            — cocok untuk camilan atau pelengkap acara 😋</div>
+          <div class="detail-price">Rp3.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card8')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/kroket.jpeg" alt="Kroket">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Kroket</div>
+          <div class="card-desc">Goreng keemasan, isian kentang lembut berbumbu. Luar renyah, dalam gurih!</div>
+          <div class="card-price">Rp3.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card8')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card9" data-category="snack" data-name="risole mayo snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Risole Mayo</div>
+          <div class="detail-text">Kulit dadar tipis nan lembut diisi mayo creamy, sayuran segar, dan telur. Digigit
+            sekali langsung ketagihan! 🥚</div>
+          <div class="detail-price">Rp3.500</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card9')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/risol mayo.jpeg" alt="Risole Mayo">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Risole Mayo</div>
+          <div class="card-desc">Kulit lembut isi mayo creamy, sayur segar, dan telur. Sekali gigit langsung ketagihan!
+          </div>
+          <div class="card-price">Rp3.500 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card9')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card10" data-category="snack" data-name="putu ayu snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Putu Ayu</div>
+          <div class="detail-text">Kue tradisional lembut berwarna hijau pandan dengan taburan kelapa parut di atasnya.
+            Manis alami, harum, bikin rindu kampung halaman 🌿</div>
+          <div class="detail-price">Rp3.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card10')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/putu ayu.jpeg" alt="Putu Ayu">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Putu Ayu</div>
+          <div class="card-desc">Kue hijau pandan lembut bertabur kelapa parut. Manis alami dan harum menggoda!</div>
+          <div class="card-price">Rp3.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card10')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card11" data-category="snack" data-name="lemper snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Lemper</div>
+          <div class="detail-text">Ketan pulen gurih dibalut daun pisang, berisi ayam suwir berbumbu rempah khas.
+            Camilan legendaris yang selalu hadir di setiap perayaan 🍃</div>
+          <div class="detail-price">Rp3.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card11')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/lemper.jpeg" alt="Lemper">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Lemper</div>
+          <div class="card-desc">Ketan pulen isi ayam suwir berbumbu rempah, dibalut daun pisang yang harum.</div>
+          <div class="card-price">Rp3.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card11')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card12" data-category="snack" data-name="klepon snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Klepon</div>
+          <div class="detail-text">Bola-bola ketan kenyal hijau pandan dengan kejutan gula merah cair di dalamnya,
+            berselimut kelapa parut segar. Legit dan bikin senyum! 🤤</div>
+          <div class="detail-price">Rp3.500</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card12')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/klepon.jpeg" alt="Klepon">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Klepon</div>
+          <div class="card-desc">Bola ketan kenyal isi gula merah cair yang meledak di mulut, balutan kelapa parut
+            segar!</div>
+          <div class="card-price">Rp3.500 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card12')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card13" data-category="snack" data-name="nagasari snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nagasari</div>
+          <div class="detail-text">Kue tepung beras lembut berisi irisan pisang manis, dikukus dalam balutan daun
+            pisang. Aroma harum khas dan tekstur lumer di lidah 🍌</div>
+          <div class="detail-price">Rp3.500</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card13')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/nagasari.jpeg" alt="Nagasari">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Nagasari</div>
+          <div class="card-desc">Kue tepung beras lembut isi pisang manis, dikukus dalam balutan daun pisang harum.
+          </div>
+          <div class="card-price">Rp3.500 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card13')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card14" data-category="snack" data-name="dadar gulung snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Dadar Gulung</div>
+          <div class="detail-text">Kulit dadar tipis berwarna hijau pandan diisi kelapa parut masak gula merah yang
+            manis legit. Digulung rapi, enak dinikmati kapan saja 🥥</div>
+          <div class="detail-price">Rp3.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card14')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/dadar gulung.jpeg" alt="Dadar Gulung">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Dadar Gulung</div>
+          <div class="card-desc">Kulit pandan tipis lembut isi kelapa manis gula merah yang legit dan menggoda.</div>
+          <div class="card-price">Rp3.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card14')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card15" data-category="snack" data-name="onde onde mochi snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Onde Onde Mochi</div>
+          <div class="detail-text">Bola kenyal bertabur wijen dengan isian kacang hijau yang lumer. Perpaduan tekstur
+            mochi lembut dan biji wijen renyah yang tak terlupakan 🌾</div>
+          <div class="detail-price">Rp3.500</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card15')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/onde onde.jpeg" alt="Onde Onde Mochi">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Onde Onde Mochi</div>
+          <div class="card-desc">Bola mochi kenyal bertabur wijen, isi kacang hijau lumer. Renyah di luar, lembut di
+            dalam!</div>
+          <div class="card-price">Rp3.500 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card15')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card16" data-category="snack" data-name="pukis snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Pukis</div>
+          <div class="detail-text">Kue berbentuk setengah bulan yang empuk dan manis, dipanggang hingga bagian bawahnya
+            kecokelatan sempurna. Cocok untuk semua usia, enak hangat maupun dingin 🌙</div>
+          <div class="detail-price">Rp3.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card16')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/pukis.jpeg" alt="Pukis">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Pukis</div>
+          <div class="card-desc">Kue setengah bulan empuk dan manis, dipanggang kecokelatan. Enak hangat maupun dingin!
+          </div>
+          <div class="card-price">Rp3.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card16')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card17" data-category="snack" data-name="macaroni schootel snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Macaroni Schootel</div>
+          <div class="detail-text">Macaroni panggang creamy dengan saus béchamel gurih dan taburan keju meleleh di
+            atasnya. Snack modern favorit semua kalangan 🧀</div>
+          <div class="detail-price">Rp4.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card17')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/macroni scothel.jpeg" alt="Macaroni Schootel">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Macaroni Schootel</div>
+          <div class="card-desc">Macaroni panggang creamy saus gurih dengan taburan keju meleleh. Favorit semua
+            kalangan!</div>
+          <div class="card-price">Rp4.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card17')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card18" data-category="snack" data-name="brownies snack">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Brownies</div>
+          <div class="detail-text">Brownies coklat moist dan fudgy, manis legit dengan aroma coklat pekat yang menggoda.
+            Lembut di dalam, sedikit krispi di luar — bikin nagih! 🍫</div>
+          <div class="detail-price">Rp5.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card18')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="Gambar/brownies.jpeg" alt="Brownies">
+        <div class="card-body">
+          <span class="card-category-badge">Snack</span>
+          <div class="card-tag">Brownies</div>
+          <div class="card-desc">Coklat moist dan fudgy, manis legit beraroma coklat pekat. Lembut di dalam, krispi di
+            luar!</div>
+          <div class="card-price">Rp5.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card18')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- no result placeholder -->
+      <div class="no-result" id="no-result">
+        <span>🔍</span>
+        Menu tidak ditemukan. Coba kata kunci lain.
+      </div>
+
+    </div><!-- /paket-grid -->
+
+  </div><!-- /main -->
+
+  <script>
+    // ── CARD DETAIL ZOOM ──
+    function showDetail(id) { document.getElementById(id).classList.add('zoomed'); }
+    function closeDetail(id) { document.getElementById(id).classList.remove('zoomed'); }
+
+    // ── SLIDER ──
+    let cur = 0;
+    const total = 3;
+    const slidesEl = document.getElementById('slides');
+    const dots = document.querySelectorAll('.dot');
+
+    function goSlide(n) {
+      cur = (n + total) % total;
+      slidesEl.style.transform = `translateX(-${cur * (100 / 3)}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+    }
+    function moveSlide(dir) { goSlide(cur + dir); }
+    setInterval(() => moveSlide(1), 4000);
+
+    // ── SEARCH & FILTER ──
+    let activeCategory = 'semua';
+
+    function filterMenu() {
+      const q = document.getElementById('search-input').value.toLowerCase().trim();
+      applyFilter(q, activeCategory);
+    }
+
+    function filterCategory(cat, btn) {
+      activeCategory = cat;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const q = document.getElementById('search-input').value.toLowerCase().trim();
+      applyFilter(q, cat);
+    }
+
+    function applyFilter(q, cat) {
+      const cards = document.querySelectorAll('.paket-grid .card');
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const name = card.dataset.name || '';
+        const cardCat = card.dataset.category || '';
+        const matchSearch = !q || name.includes(q);
+        const matchCat = cat === 'semua' || cardCat === cat;
+        if (matchSearch && matchCat) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      const noResult = document.getElementById('no-result');
+      noResult.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>
