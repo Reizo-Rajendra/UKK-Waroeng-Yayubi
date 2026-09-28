@@ -3,10 +3,16 @@
 // KONFIGURASI MIDTRANS - Catering Yayubi
 // ============================================================
 
-// Ganti dengan Server Key dan Client Key Midtrans kamu
-// Dapatkan di: https://dashboard.midtrans.com > Settings > Access Keys
-define('MIDTRANS_SERVER_KEY', 'YOUR_MIDTRANS_SERVER_KEY_HERE');
-define('MIDTRANS_CLIENT_KEY', 'YOUR_MIDTRANS_CLIENT_KEY_HERE');
+// Muat key dari file lokal (TIDAK ter-commit ke GitHub)
+// Buat file: pembayaran/midtrans_config.local.php berisi key aslimu
+if (file_exists(__DIR__ . '/midtrans_config.local.php')) {
+    require_once __DIR__ . '/midtrans_config.local.php';
+} else {
+    // Fallback placeholder (ganti jika tidak pakai file lokal)
+    define('MIDTRANS_SERVER_KEY', 'YOUR_MIDTRANS_SERVER_KEY_HERE');
+    define('MIDTRANS_CLIENT_KEY', 'YOUR_MIDTRANS_CLIENT_KEY_HERE');
+}
+
 define('MIDTRANS_IS_PRODUCTION', false);  // false = Sandbox (test tanpa uang asli)
 
 // URL Midtrans berdasarkan mode
