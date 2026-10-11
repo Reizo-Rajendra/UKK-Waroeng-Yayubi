@@ -293,7 +293,7 @@ if ($is_success && $id_pesanan > 0) {
         </div>
         <?php endif; ?>
 
-        <a href="../Home page/home.html" class="btn-home">🏠 Kembali ke Beranda</a>
+        <a href="/Home%20page/home.html" class="btn-home">🏠 Kembali ke Beranda</a>
     </div>
 
 </div>

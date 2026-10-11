@@ -110,7 +110,7 @@ class UserController {
             if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'penjual')) {
                 header("Location: ../view/admin/dashboard.php");
             } else {
-                header("Location: ../../Home page/home.php");
+                header("Location: /Home%20page/home.php");
             }
             exit();
         }

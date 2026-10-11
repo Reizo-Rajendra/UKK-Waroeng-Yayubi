@@ -21,10 +21,31 @@ if ($conn->connect_error) {
     die('<p style="color:red">Koneksi gagal: ' . $conn->connect_error . '</p>');
 }
 
-$sql = file_get_contents(__DIR__ . '/sistem_admin/project_yayubi.sql');
+// Cari file SQL di beberapa kemungkinan path
+$sql_paths = [
+    __DIR__ . '/sistem_admin/project_yayubi.sql',
+    '/app/sistem_admin/project_yayubi.sql',
+    dirname(__DIR__) . '/sistem_admin/project_yayubi.sql',
+];
+$sql = false;
+$found_path = '';
+foreach ($sql_paths as $path) {
+    if (file_exists($path)) {
+        $sql = file_get_contents($path);
+        $found_path = $path;
+        break;
+    }
+}
+echo "<p>📁 Root dir: <code>" . __DIR__ . "</code></p>";
+echo "<p>📄 SQL path: <code>" . ($found_path ?: 'NOT FOUND') . "</code></p>";
 if (!$sql) {
+    echo "<p>Files found: <pre>";
+    $files = glob(__DIR__ . '/sistem_admin/*');
+    foreach ($files as $f) echo $f . "\n";
+    echo "</pre></p>";
     die('<p style="color:red">File SQL tidak ditemukan!</p>');
 }
+
 
 // Hapus CREATE DATABASE dan USE statement (sudah pakai DB Railway)
 $sql = preg_replace('/CREATE DATABASE.*?;\s*/is', '', $sql);

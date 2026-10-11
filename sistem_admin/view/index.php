@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         } else {
             // jika role pembeli, arahkan ke beranda
-            header("Location: ../../Home page/home.php");
+            header("Location: /Home%20page/home.php");
             exit();
         }
     } else {

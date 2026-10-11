@@ -483,7 +483,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <?php endif; ?>
 
-            <a href="../Home page/home.html" class="btn-back">← Kembali ke Beranda</a>
+            <a href="/Home%20page/home.html" class="btn-back">← Kembali ke Beranda</a>
         </div>
     </div>
 
@@ -530,7 +530,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 } else {
     // Jika akses langsung tanpa formulir
-    header("Location: ../Home page/home.html");
+    header("Location: /Home%20page/home.html");
     exit;
 }
 ?>

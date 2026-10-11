@@ -162,7 +162,7 @@ function getBadgeLabel($kategori) {
 
   <!-- ══════════ TOMBOL KEMBALI ══════════ -->
   <div class="btn-solid">
-    <a href="../../Home page/home.php" class="btn-kembali">
+    <a href="/Home%20page/home.php" class="btn-kembali">
       <span>←</span> Kembali
     </a>
   </div>
