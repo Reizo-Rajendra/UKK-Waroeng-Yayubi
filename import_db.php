@@ -10,71 +10,72 @@ if ($secret !== 'yayubi-import-2024') {
     die('Akses ditolak. Tambahkan ?key=yayubi-import-2024 di URL.');
 }
 
+echo '<h2>🚀 Import Database Yayubi</h2>';
+echo '<p>📁 App dir: <code>' . __DIR__ . '</code></p>';
+
+// Baca env vars Railway
 $host   = getenv('MYSQLHOST')     ?: 'localhost';
 $user   = getenv('MYSQLUSER')     ?: 'root';
 $pass   = getenv('MYSQLPASSWORD') ?: '';
 $dbname = getenv('MYSQLDATABASE') ?: 'railway';
 $port   = (int)(getenv('MYSQLPORT') ?: 3306);
 
-$conn = new mysqli($host, $user, $pass, $dbname, $port);
-if ($conn->connect_error) {
-    die('<p style="color:red">Koneksi gagal: ' . $conn->connect_error . '</p>');
+echo "<p>🔌 Connecting to: <code>$host:$port / $dbname</code></p>";
+
+// Koneksi via PDO dengan timeout
+try {
+    $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
+    $pdo = new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_TIMEOUT            => 10,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4",
+    ]);
+    echo '<p>✅ Koneksi database berhasil!</p>';
+} catch (PDOException $e) {
+    die('<p style="color:red">❌ Koneksi gagal: ' . htmlspecialchars($e->getMessage()) . '</p>');
 }
 
-// Cari file SQL di beberapa kemungkinan path
-$sql_paths = [
-    __DIR__ . '/sistem_admin/project_yayubi.sql',
-    '/app/sistem_admin/project_yayubi.sql',
-    dirname(__DIR__) . '/sistem_admin/project_yayubi.sql',
-];
-$sql = false;
-$found_path = '';
-foreach ($sql_paths as $path) {
-    if (file_exists($path)) {
-        $sql = file_get_contents($path);
-        $found_path = $path;
-        break;
-    }
-}
-echo "<p>📁 Root dir: <code>" . __DIR__ . "</code></p>";
-echo "<p>📄 SQL path: <code>" . ($found_path ?: 'NOT FOUND') . "</code></p>";
-if (!$sql) {
-    echo "<p>Files found: <pre>";
-    $files = glob(__DIR__ . '/sistem_admin/*');
-    foreach ($files as $f) echo $f . "\n";
-    echo "</pre></p>";
+// Cari file SQL
+$sql_file = __DIR__ . '/sistem_admin/project_yayubi.sql';
+echo "<p>📄 SQL file: <code>$sql_file</code> — " . (file_exists($sql_file) ? '✅ Found' : '❌ Not found') . '</p>';
+
+if (!file_exists($sql_file)) {
+    echo '<pre>';
+    $items = glob(__DIR__ . '/sistem_admin/*') ?: [];
+    foreach ($items as $f) echo $f . "\n";
+    echo '</pre>';
     die('<p style="color:red">File SQL tidak ditemukan!</p>');
 }
 
+$sql = file_get_contents($sql_file);
 
-// Hapus CREATE DATABASE dan USE statement (sudah pakai DB Railway)
-$sql = preg_replace('/CREATE DATABASE.*?;\s*/is', '', $sql);
+// Hapus CREATE DATABASE dan USE (sudah pakai DB Railway)
+$sql = preg_replace('/CREATE\s+DATABASE\b.*?;\s*/is', '', $sql);
 $sql = preg_replace('/USE\s+`[^`]+`\s*;\s*/is', '', $sql);
+$sql = preg_replace('/\/\*.*?\*\/\s*/s', '', $sql); // hapus komentar block
+$sql = preg_replace('/--[^\n]*\n/s', "\n", $sql);   // hapus komentar line
 
 // Split per statement
-$queries = array_filter(
-    array_map('trim', explode(";\n", $sql)),
-    fn($q) => !empty($q) && !preg_match('/^\s*(--|\/\*)/s', $q)
-);
+$queries = array_filter(array_map('trim', explode(';', $sql)));
 
-echo '<h2>🚀 Import Database Yayubi</h2>';
 echo '<pre>';
-
 $success = 0;
 $errors  = 0;
 foreach ($queries as $query) {
-    if (empty(trim($query))) continue;
-    if ($conn->query($query)) {
+    if (empty($query) || ctype_space($query)) continue;
+    try {
+        $pdo->exec($query);
         $success++;
-    } else {
-        echo "❌ Error: " . $conn->error . "\n   Query: " . substr($query, 0, 80) . "...\n";
+    } catch (PDOException $e) {
+        echo "⚠️  " . htmlspecialchars(substr($query, 0, 60)) . "...\n";
+        echo "   Error: " . htmlspecialchars($e->getMessage()) . "\n\n";
         $errors++;
     }
 }
-
 echo '</pre>';
-echo "<p>✅ Berhasil: <strong>$success</strong> query | ❌ Error: <strong>$errors</strong> query</p>";
-echo '<p style="color:orange"><strong>⚠️ PENTING: Hapus file import_db.php setelah ini!</strong></p>';
 
-$conn->close();
+echo "<hr><p>✅ <strong>$success</strong> query berhasil | ❌ <strong>$errors</strong> error</p>";
+echo '<p style="color:green"><strong>Database berhasil diimport! Website siap digunakan.</strong></p>';
+echo '<p style="color:orange">⚠️ Segera hapus file <code>import_db.php</code> setelah ini!</p>';
+echo '<p><a href="/sistem_admin/view/index.php">→ Ke Halaman Login</a></p>';
 ?>
