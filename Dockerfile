@@ -1,26 +1,28 @@
 FROM php:8.3-apache
 
+# Fix Apache MPM conflict — disable event & worker, pakai prefork (kompatibel PHP)
+RUN a2dismod mpm_event mpm_worker 2>/dev/null || true \
+    && a2enmod mpm_prefork
+
 # Install mysqli dan ekstensi PHP yang dibutuhkan
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Aktifkan mod_rewrite Apache
 RUN a2enmod rewrite
 
-# Set document root ke /var/www/html
+# Konfigurasi Apache agar AllowOverride berjalan
+RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+
+# Set document root
 WORKDIR /var/www/html
 
 # Copy semua file project
 COPY . .
 
-# Konfigurasi Apache agar bisa baca .htaccess
-RUN echo '<Directory /var/www/html>\n\
-    Options Indexes FollowSymLinks\n\
-    AllowOverride All\n\
-    Require all granted\n\
-</Directory>' > /etc/apache2/conf-available/app.conf \
-    && a2enconf app
+# Pastikan permission benar
+RUN chown -R www-data:www-data /var/www/html
 
-# Port yang dipakai Railway
+# Port Railway
 EXPOSE 80
 
 CMD ["apache2-foreground"]
